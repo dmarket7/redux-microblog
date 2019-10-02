@@ -1,15 +1,16 @@
 import React, { Component } from "react";
-import { Card, Button, CardTitle, CardText, CardSubtitle, Col } from 'reactstrap';
+import { Card, Button, CardTitle, CardSubtitle, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class BlogCard extends Component {
   render() {
+    const { title, description, id } = this.props.blog
     return (
       <Col sm="4">
         <Card body>
-          <CardTitle>{this.props.blog.title}</CardTitle>
-          <CardSubtitle>{this.props.blog.description}</CardSubtitle>
-          <CardText>{this.props.blog.body}</CardText>
-          <Button>Go somewhere</Button>
+          <CardTitle>{title}</CardTitle>
+          <CardSubtitle>{description}</CardSubtitle>
+          <Link to={`/${id}`}><Button>View Full Post</Button></Link>
         </Card>
       </Col>
     );

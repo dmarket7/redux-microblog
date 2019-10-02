@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-class NewBlogForm extends Component {
-  constructor(props){
+class EditBlogForm extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
       title: '',
@@ -14,6 +14,15 @@ class NewBlogForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    this.setState({
+      title: this.props.blog.title,
+      description: this.props.blog.description,
+      body: this.props.blog.body,
+      id: this.props.blog.id
+    });
+  }
+
   handleChange(evt){
     this.setState({
       [evt.target.name]: evt.target.value
@@ -22,15 +31,10 @@ class NewBlogForm extends Component {
 
   handleSubmit(evt){
     evt.preventDefault();
-    this.props.addBlog(this.state);
-    this.setState({
-      title: '',
-      description: '',
-      body: ''
-    });
-    this.props.history.push('/');
+    this.props.editBlog(this.state);
+    this.props.toggleEdit();
   }
-  
+
   render() {
     return (
       <div className="container justify-content-center mt-5">
@@ -58,4 +62,4 @@ class NewBlogForm extends Component {
   }
 }
 
-export default NewBlogForm;
+export default EditBlogForm;

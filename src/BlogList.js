@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { Row } from 'reactstrap';
 import BlogCard from './BlogCard';
 
 class BlogList extends Component {
