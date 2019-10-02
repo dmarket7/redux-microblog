@@ -4,6 +4,7 @@ import BlogCard from './BlogCard';
 
 class BlogList extends Component {
   render() {
+    console.log("BLOGS FROM PROPS", this.props.blogs);
     return (
       <div>
         <h2>BlogList</h2>
@@ -11,10 +12,11 @@ class BlogList extends Component {
         <Row>
           {
             this.props.blogs.map(blog =>{
-              return <BlogCard key={blog.id} blog={blog}/>
+              return <BlogCard key={Object.keys(blog)[0]} 
+                               blog={Object.values(blog)[0]} 
+                               id={Object.keys(blog)[0]}/>
             })
           }
-          {/* <BlogCard title={"Hello there"} description={"Let's code"} body={"We rock!!!!"} /> */}
         </Row>
       </div>
     );

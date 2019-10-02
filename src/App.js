@@ -6,9 +6,9 @@ import uuid from 'uuid/v4';
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      blogs: [{title: "asdf", description: "asdf", body: "asdf↵", id: "216b435c-e932-49e2-9e07-bfad0e80da96"}]
-    }
+    // this.state = {
+    //   blogs: [{title: "asdf", description: "asdf", body: "asdf↵", id: "216b435c-e932-49e2-9e07-bfad0e80da96"}]
+    // }
     this.addBlog = this.addBlog.bind(this);
     this.editBlog = this.editBlog.bind(this);
     this.deleteBlog = this.deleteBlog.bind(this);
@@ -61,7 +61,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Routes blogs={this.state.blogs}
+        <Routes 
                 addBlog={this.addBlog}
                 editBlog={this.editBlog}
                 deleteBlog={this.deleteBlog}

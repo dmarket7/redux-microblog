@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import BlogList from './BlogList';
+import BlogListContainer from '../Containers/BlogListContainer';
 import BlogHeader from './BlogHeader';
 
 class Home extends Component {
@@ -7,7 +7,7 @@ class Home extends Component {
     return (
       <div className="container">
         <BlogHeader />
-        <BlogList blogs={this.props.blogs}/>
+        <BlogListContainer />
       </div>
     );
   }

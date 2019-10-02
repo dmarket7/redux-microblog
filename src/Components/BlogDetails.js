@@ -26,11 +26,9 @@ class BlogDetails extends Component {
   }
 
   render() {
-    const id = this.props.match.params.postId;
-    const blog = this.props.blogs.filter(blog => blog.id === id)[0];
-    console.log("From Blog Details", blog);
-    console.log("This.props.blogs", this.props.blogs)
-    const { title, body, description, comments } = blog;
+    // const id = this.props.match.params.postId; //abstract out, send in container with mapStateToProps
+    // const blog = this.props.blogs.filter(blog => blog.id === id)[0];
+    const { title, body, description, comments, id } = this.props.blog;
 
     return (
       <div className="container">
@@ -50,7 +48,7 @@ class BlogDetails extends Component {
                       id={id}
             />
           </div> :
-          <EditBlogForm blog={blog} editBlog={this.props.editBlog} toggleEdit={this.toggleEdit} />
+          <EditBlogForm blog={this.props.blog} editBlog={this.props.editBlog} toggleEdit={this.toggleEdit} />
         }
         
       </div>
