@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import BlogHeader from './BlogHeader';
 import EditBlogForm from './EditBlogForm';
 import { Button } from 'reactstrap';
+import Comments from './Comments'
 
 class BlogDetails extends Component {
   constructor(props) {
@@ -27,10 +28,12 @@ class BlogDetails extends Component {
   render() {
     const id = this.props.match.params.postId;
     const blog = this.props.blogs.filter(blog => blog.id === id)[0];
-    const { title, body, description } = blog;
+    console.log("From Blog Details", blog);
+    console.log("This.props.blogs", this.props.blogs)
+    const { title, body, description, comments } = blog;
 
     return (
-      <div>
+      <div className="container">
         <BlogHeader />
         {!(this.state.editing) ?
           <div>
@@ -41,9 +44,15 @@ class BlogDetails extends Component {
               <Button color="danger" className="mx-3" onClick={() => this.deleteAndRedirect(id)}>Delete</Button>
             </div>
             <p>{body}</p>
+            <Comments comments={comments || []}
+                      addComment={this.props.addComment}
+                      deleteComment={this.props.deleteComment}
+                      id={id}
+            />
           </div> :
           <EditBlogForm blog={blog} editBlog={this.props.editBlog} toggleEdit={this.toggleEdit} />
         }
+        
       </div>
     );
   }

@@ -13,7 +13,14 @@ class Routes extends Component {
 
           <Route exact path='/new' render={(props) => <NewBlogForm {...props} addBlog={this.props.addBlog} />} />
 
-          <Route path='/:postId' render={(props) => <BlogDetails {...props} blogs={this.props.blogs} editBlog={this.props.editBlog} deleteBlog={this.props.deleteBlog} />} />
+          <Route path='/:postId' render={(props) => <BlogDetails {...props} 
+                                                                  blogs={this.props.blogs}
+                                                                  editBlog={this.props.editBlog}
+                                                                  deleteBlog={this.props.deleteBlog}
+                                                                  addComment={this.props.addComment}
+                                                                  deleteComment={this.props.deleteComment}
+                                                    />}
+          />
 
           <Redirect to='/' />
 

@@ -12,6 +12,8 @@ class App extends Component {
     this.addBlog = this.addBlog.bind(this);
     this.editBlog = this.editBlog.bind(this);
     this.deleteBlog = this.deleteBlog.bind(this);
+    this.addComment = this.addComment.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
   }
 
   addBlog(blog){
@@ -33,10 +35,39 @@ class App extends Component {
     });
   }
 
+  addComment(id, comment){
+    let findBlog = this.state.blogs.filter(blog => blog.id === id)[0];
+    if(!findBlog.comments) {
+      findBlog.comments = [comment]
+    } else {
+      findBlog.comments.push(comment);
+    }
+    let newBlogs = this.state.blogs.filter(blog => blog.id !== id);
+    this.setState({
+      blogs: [...newBlogs, findBlog]
+    });
+  }
+
+  deleteComment(id, comment){
+    let findBlog = this.state.blogs.filter(blog => blog.id === id)[0];
+    let newComments = findBlog.comments.filter(comm => comm !== comment);
+    findBlog.comments = newComments;
+    let newBlogs = this.state.blogs.filter(blog => blog.id !== id);
+    this.setState({
+      blogs: [...newBlogs, findBlog]
+    });
+  }
+
   render() {
     return (
       <div className="App">
-        <Routes blogs={this.state.blogs} addBlog={this.addBlog} editBlog={this.editBlog} deleteBlog={this.deleteBlog} />
+        <Routes blogs={this.state.blogs}
+                addBlog={this.addBlog}
+                editBlog={this.editBlog}
+                deleteBlog={this.deleteBlog}
+                addComment={this.addComment}
+                deleteComment={this.deleteComment}
+        />
       </div>
     );
   }
