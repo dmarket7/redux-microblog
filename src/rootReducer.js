@@ -1,7 +1,7 @@
 import {
   ADD_BLOG_POST, EDIT_BLOG_POST, DELETE_BLOG_POST,
   ADD_COMMENT, DELETE_COMMENT, LOAD_BLOGS,
-  SHOW_ERR, SHOW_LOADING
+  SHOW_ERR, SHOW_LOADING, LOAD_BLOG
 } from './actionTypes';
 import uuid from 'uuid/v4';
 
@@ -60,11 +60,13 @@ function rootReducer(state = INITIAL_STATE, action) {
       return { loading: "Loading..." }
 
     case LOAD_BLOGS:
-      console.log("Blogs from reducer", action)
       return { blogs: action.blogs }
 
     case SHOW_ERR:
       return { error: "Couldn't find your blog posts :(" }
+
+    case LOAD_BLOG:
+      return { blogs: state.blogs, currentBlog: action.blog }
 
     default:
       return state

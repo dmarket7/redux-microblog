@@ -10,7 +10,7 @@ class BlogCard extends Component {
         <Card body>
           <CardTitle>{title}</CardTitle>
           <CardSubtitle>{description}</CardSubtitle>
-          <Link to={`/${this.props.id}`}><Button>View Full Post</Button></Link>
+          <Link to={`/${this.props.blog.id}`}><Button>View Full Post</Button></Link>
         </Card>
       </Col>
     );

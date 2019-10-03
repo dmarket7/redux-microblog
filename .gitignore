@@ -11,6 +11,9 @@
 # production
 /build
 
+# backend
+/redux-microblog-backend
+
 # misc
 .DS_Store
 .env.local

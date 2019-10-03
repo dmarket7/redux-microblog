@@ -7,7 +7,7 @@ class CommentsList extends Component {
       <ul>
         {
           this.props.comments.map((comm, idx) => {
-            return <li key={comm.commentId}>{comm.comment}<Button color="danger" onClick={() => this.props.deleteComment(this.props.id, comm.commentId)}>X</Button></li>
+            return <li key={comm.id}>{comm.text}<Button color="danger" onClick={() => this.props.deleteComment(this.props.id, comm.commentId)}>X</Button></li>
           })
         }
       </ul>

@@ -14,45 +14,50 @@ class BlogDetails extends Component {
     this.deleteAndRedirect = this.deleteAndRedirect.bind(this);
   }
 
+  async componentDidMount() {
+    await this.props.getBlogFromDB(this.props.match.params.postId);
+  }
+
   toggleEdit() {
     this.setState({
       editing: !this.state.editing
     });
   }
 
-  deleteAndRedirect(id) {
-    this.props.deleteBlog(id);
+  async deleteAndRedirect(id) {
+    await this.props.deleteBlogFromDB(id);
     this.props.history.push('/');
   }
 
   render() {
-    // const id = this.props.match.params.postId; //abstract out, send in container with mapStateToProps
-    // const blog = this.props.blogs.filter(blog => blog.id === id)[0];
-    const { title, body, description, comments, id } = this.props.blog;
+    if (!this.props.currentBlog) {
+      return <p>{this.props.loading}</p>
+    } else {
+      const { title, body, description, comments, id } = this.props.currentBlog;
+      return (
+        <div className="container">
+          <BlogHeader />
+          {!(this.state.editing) ?
+            <div>
+              <h2>{title}</h2>
+              <h5><i>{description}</i></h5>
+              <div className="buttons">
+                <Button color="success" className="mx-3" onClick={this.toggleEdit}>Edit</Button>
+                <Button color="danger" className="mx-3" onClick={() => this.deleteAndRedirect(id)}>Delete</Button>
+              </div>
+              <p>{body}</p>
+              <Comments comments={comments || []}
+                addComment={this.props.addComment}
+                deleteComment={this.props.deleteComment}
+                id={id}
+              />
+            </div> :
+            <EditBlogForm blog={this.props.blog} editBlog={this.props.editBlog} toggleEdit={this.toggleEdit} />
+          }
 
-    return (
-      <div className="container">
-        <BlogHeader />
-        {!(this.state.editing) ?
-          <div>
-            <h2>{title}</h2>
-            <h5><i>{description}</i></h5>
-            <div className="buttons">
-              <Button color="success" className="mx-3" onClick={this.toggleEdit}>Edit</Button>
-              <Button color="danger" className="mx-3" onClick={() => this.deleteAndRedirect(id)}>Delete</Button>
-            </div>
-            <p>{body}</p>
-            <Comments comments={comments || []}
-                      addComment={this.props.addComment}
-                      deleteComment={this.props.deleteComment}
-                      id={id}
-            />
-          </div> :
-          <EditBlogForm blog={this.props.blog} editBlog={this.props.editBlog} toggleEdit={this.toggleEdit} />
-        }
-        
-      </div>
-    );
+        </div>
+      );
+    }
   }
 }
 

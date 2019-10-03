@@ -1,4 +1,4 @@
-import { ADD_BLOG_POST, EDIT_BLOG_POST, DELETE_BLOG_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_BLOGS, SHOW_ERR, SHOW_LOADING } from './actionTypes';
+import { ADD_BLOG_POST, EDIT_BLOG_POST, DELETE_BLOG_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_BLOGS, SHOW_ERR, SHOW_LOADING, LOAD_BLOG } from './actionTypes';
 import uuid from 'uuid/v4';
 import axios from 'axios';
 
@@ -24,7 +24,7 @@ export function editBlog(blog) {
 export function deleteBlog(id) {
   return {
     type: DELETE_BLOG_POST,
-    payload: id
+    id
   }
 }
 
@@ -42,16 +42,20 @@ export function deleteComment(blogId, commentId) {
   }
 }
 
-export function gotBlogs(blogs) {
+function gotBlogs(blogs) {
   return { type: LOAD_BLOGS, blogs }
 }
 
-export function showErr(msg) {
+function showErr(msg) {
   return { type: SHOW_ERR, msg };
 }
 
-export function startLoad() {
+function startLoad() {
   return { type: SHOW_LOADING };
+}
+
+function gotBlog(blog) {
+  return { type: LOAD_BLOG, blog }
 }
 
 // Thunk actions
@@ -62,9 +66,33 @@ export function getBlogsFromDB() {
 
     try {
       let res = await axios.get(`${BASE_URL}api/posts`);
-      console.log("RES from actions", res.data)
-      dispatch(gotBlogs(res.data))
+      dispatch(gotBlogs(res.data));
     } catch (err) {
+      dispatch(showErr(err.response.data));
+    }
+  }
+}
+
+export function getBlogFromDB(id) {
+  return async function (dispatch) {
+    dispatch(startLoad());
+
+    try {
+      let res = await axios.get(`${BASE_URL}api/posts/${id}`);
+      dispatch(gotBlog(res.data));
+    } catch(err) {
+      dispatch(showErr(err.response.data));
+    }
+  }
+}
+
+export function deleteBlogFromDB(id) {
+  return async function (dispatch) {
+    dispatch(startLoad());
+
+    try {
+      await axios.delete(`${BASE_URL}api/posts/${id}`);
+    } catch(err) {
       dispatch(showErr(err.response.data));
     }
   }

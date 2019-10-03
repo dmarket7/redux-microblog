@@ -6,3 +6,4 @@ export const DELETE_COMMENT = "DELETE_COMMENT";
 export const LOAD_BLOGS = "LOAD_BLOGS";
 export const SHOW_ERR = "SHOW_ERR";
 export const SHOW_LOADING = "SHOW_LOADING";
+export const LOAD_BLOG = "LOAD_BLOG";

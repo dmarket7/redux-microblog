@@ -8,14 +8,13 @@ class BlogList extends Component {
   }
 
   render() {
-    console.log("BLOGS FROM PROPS", this.props.blogs);
     return (
       <div>
         <h2>BlogList</h2>
         Map and create BlogCards...
         <Row>
 
-          {this.props.loading ?
+          {!this.props.blogs ?
             <p>{this.props.loading}</p> :
 
             this.props.blogs.map(blog => {
