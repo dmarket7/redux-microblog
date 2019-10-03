@@ -3,9 +3,9 @@ import { editBlog, deleteBlog, addComment, deleteComment } from '../actions';
 import BlogDetails from '../Components/BlogDetails';
 
 function mapStateToProps(state, ownProps) {
-  let id = ownProps.match.params.postId;
-  let blog = state.blogs[id];
-  if(blog) blog.id = id;
+  const { postId } = ownProps.match.params;
+  const blog = state.blogs[postId];
+  if (blog) { blog.id = postId; }
   return { blog };
 }
 

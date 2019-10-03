@@ -12,6 +12,7 @@ class BlogList extends Component {
         <Row>
           {
             this.props.blogs.map(blog =>{
+              // destructure with variable names
               return <BlogCard key={Object.keys(blog)[0]} 
                                blog={Object.values(blog)[0]} 
                                id={Object.keys(blog)[0]}/>

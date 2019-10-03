@@ -13,8 +13,7 @@ class Routes extends Component {
 
           <Route exact path='/new' render={(props) => <NewBlogFormContainer {...props} />} />
 
-          <Route path='/:postId' render={(props) => <BlogDetailsContainer {...props} />}
-          />
+          <Route path='/:postId' render={(props) => <BlogDetailsContainer {...props} />} />
 
           <Redirect to='/' />
 

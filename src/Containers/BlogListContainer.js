@@ -3,8 +3,8 @@ import BlogList from '../Components/BlogList';
 
 function mapStateToProps(state) {
 
-  let blogIds = Object.keys(state.blogs);
-  let allBlogs = blogIds.map(id => {
+  const blogIds = Object.keys(state.blogs);
+  const allBlogs = blogIds.map(id => {
     return { [id]: state.blogs[id] }
   })
 
