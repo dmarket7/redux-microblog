@@ -17,10 +17,10 @@ export function deleteBlog(id) {
   }
 }
 
-export function addComment(blogId, comment) {
+function addComment(comment) {
   return {
     type: ADD_COMMENT,
-    payload: { blogId, comment }
+    comment
   }
 }
 
@@ -108,6 +108,21 @@ export function editBlogInDB(blog) {
       dispatch(editBlog(res.data));
     } catch(err) {
       dispatch(showErr(err.response.data));
+    }
+  }
+}
+
+export function addCommentToDB(blogId, text){
+  return async function(dispatch){
+    dispatch(startLoad());
+
+    try {
+      let res = await axios.post(`${BASE_URL}api/posts/${blogId}/comments`, {text});
+      console.log("RES", res)
+      dispatch(addComment(res.data))
+    } catch(err) {
+      console.log("ERR", err)
+      dispatch(showErr(err));
     }
   }
 }

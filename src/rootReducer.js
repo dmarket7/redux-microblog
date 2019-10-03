@@ -24,20 +24,13 @@ function rootReducer(state = INITIAL_STATE, action) {
   // make this async and update -- state = await getDataFromDB()
   switch (action.type) {
     case EDIT_BLOG_POST:
-      return { currentBlog: action.blog }
+      return { ...state, currentBlog: action.blog, loading: null }
 
     case ADD_COMMENT:
-      let { blogId, comment } = action.payload;
-      let blog = state.blogs[blogId];
-      delete blog.id;
-      let commentId = uuid();
-
-      if (blog.comments) {
-        blog.comments.push({ comment, commentId })
-      } else {
-        blog.comments = [{ comment, commentId }]
-      }
-      return { blogs: { ...state.blogs, [blogId]: blog } }
+      let blogWithNewComment = { ...state.currentBlog }
+      console.log("blog with comments", state)
+      blogWithNewComment.comments = [...blogWithNewComment.comments, action.comment]
+      return { ...state, currentBlog: blogWithNewComment, loading: null }
 
     case DELETE_COMMENT:
       let commId = action.payload.commentId;
@@ -46,19 +39,19 @@ function rootReducer(state = INITIAL_STATE, action) {
       let modComments = modBlog.comments.filter(c => c.commentId !== commId);
       modBlog.comments = modComments;
       delete modBlog.id;
-      return { blogs: { ...state.blogs, [blId]: modBlog } }
+      return { ...state, blogs: { ...state.blogs, [blId]: modBlog }, loading: null }
 
     case SHOW_LOADING:
-      return { loading: "Loading..." }
+      return { ...state, loading: "Loading..." }
 
     case LOAD_BLOGS:
-      return { blogs: action.blogs }
+      return { ...state, blogs: action.blogs, loading: null }
 
     case SHOW_ERR:
-      return { error: "Couldn't find your blog posts :(" }
+      return { ...state, error: "Couldn't find your blog posts :(", loading: null }
 
     case LOAD_BLOG:
-      return { blogs: state.blogs, currentBlog: action.blog }
+      return { ...state, blogs: state.blogs, currentBlog: action.blog, loading: null }
 
     default:
       return state

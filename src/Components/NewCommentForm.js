@@ -20,7 +20,9 @@ class NewCommentForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.addComment(this.props.id, this.state.comment);
+    console.log("This.props.id", this.props.id)
+    console.log("This.props.comment", this.state.comment)
+    this.props.addCommentToDB(this.props.id, this.state.comment);
     this.setState({
       comment: ''
     });

@@ -9,7 +9,7 @@ class Comments extends Component {
         <CommentsList comments={this.props.comments}
                       deleteComment={this.props.deleteComment}
                       id={this.props.id}/>
-        <NewCommentForm addComment={this.props.addComment} id={this.props.id}/>
+        <NewCommentForm addCommentToDB={this.props.addCommentToDB} id={this.props.id}/>
       </div>
     );
   }

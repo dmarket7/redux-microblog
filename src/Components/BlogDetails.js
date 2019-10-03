@@ -18,6 +18,10 @@ class BlogDetails extends Component {
     await this.props.getBlogFromDB(this.props.match.params.postId);
   }
 
+  // async componentDidUpdate(){
+  //   await this.props.getBlogFromDB(this.props.match.params.postId);
+  // }
+
   toggleEdit() {
     this.setState({
       editing: !this.state.editing
@@ -31,7 +35,7 @@ class BlogDetails extends Component {
 
   render() {
     console.log("CURRENT BLOG", this.props.currentBlog);
-    if (!this.props.currentBlog) {
+    if (!this.props.currentBlog || this.props.loading) {
       return <p>{this.props.loading}</p>
     } else {
       const { title, body, description, comments, id } = this.props.currentBlog;
@@ -48,7 +52,7 @@ class BlogDetails extends Component {
               </div>
               <p>{body}</p>
               <Comments comments={comments || []}
-                addComment={this.props.addComment}
+                addCommentToDB={this.props.addCommentToDB}
                 deleteComment={this.props.deleteComment}
                 id={id}
               />
