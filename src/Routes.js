@@ -9,17 +9,11 @@ class Routes extends Component {
     return (
       <div>
         <Switch >
-          <Route exact path='/' render={() => <Home blogs={this.props.blogs} />} />
+          <Route exact path='/' render={() => <Home />} />
 
           <Route exact path='/new' render={(props) => <NewBlogFormContainer {...props} />} />
 
-          <Route path='/:postId' render={(props) => <BlogDetailsContainer {...props} 
-                                                                  // blogs={this.props.blogs}
-                                                                  // editBlog={this.props.editBlog}
-                                                                  // deleteBlog={this.props.deleteBlog}
-                                                                  // addComment={this.props.addComment}
-                                                                  // deleteComment={this.props.deleteComment}
-                                                    />}
+          <Route path='/:postId' render={(props) => <BlogDetailsContainer {...props} />}
           />
 
           <Redirect to='/' />

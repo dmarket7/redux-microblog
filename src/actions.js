@@ -32,9 +32,9 @@ export function addComment(blogId, comment) {
   }
 }
 
-export function deleteComment(blogId, comment) {
+export function deleteComment(blogId, commentId) {
   return {
     type: DELETE_COMMENT,
-    payload: { blogId, comment }
+    payload: { blogId, commentId }
   }
 }

@@ -5,7 +5,7 @@ import BlogDetails from '../Components/BlogDetails';
 function mapStateToProps(state, ownProps) {
   let id = ownProps.match.params.postId;
   let blog = state.blogs[id];
-  blog.id = id;
+  if(blog) blog.id = id;
   return { blog };
 }
 
