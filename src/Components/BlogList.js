@@ -3,19 +3,26 @@ import { Row } from 'reactstrap';
 import BlogCard from './BlogCard';
 
 class BlogList extends Component {
+  async componentDidMount() {
+    await this.props.getBlogsFromDB();
+  }
+
   render() {
     console.log("BLOGS FROM PROPS", this.props.blogs);
     return (
       <div>
         <h2>BlogList</h2>
-          Map and create BlogCards...
+        Map and create BlogCards...
         <Row>
-          {
-            this.props.blogs.map(blog =>{
+
+          {this.props.loading ?
+            <p>{this.props.loading}</p> :
+
+            this.props.blogs.map(blog => {
               // destructure with variable names
-              return <BlogCard key={Object.keys(blog)[0]} 
-                               blog={Object.values(blog)[0]} 
-                               id={Object.keys(blog)[0]}/>
+              return <BlogCard key={blog.id}
+                blog={blog}
+                 />
             })
           }
         </Row>

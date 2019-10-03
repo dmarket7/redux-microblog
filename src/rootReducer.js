@@ -1,18 +1,27 @@
-import { ADD_BLOG_POST, EDIT_BLOG_POST, DELETE_BLOG_POST, ADD_COMMENT, DELETE_COMMENT } from './actionTypes';
+import {
+  ADD_BLOG_POST, EDIT_BLOG_POST, DELETE_BLOG_POST,
+  ADD_COMMENT, DELETE_COMMENT, LOAD_BLOGS,
+  SHOW_ERR, SHOW_LOADING
+} from './actionTypes';
 import uuid from 'uuid/v4';
 
 const INITIAL_STATE = {
-  blogs: {
-    "216b435c-e932-49e2-9e07-bfad0e80da96": {
-      title: "asdf",
-      description: "asdf",
-      body: "asdf↵",
-      comments: []
-    }
-  }
+  blogs: [],
+  currentBlog: {}
+  // blogs: {
+  //   "216b435c-e932-49e2-9e07-bfad0e80da96": {
+  //     title: "asdf",
+  //     description: "asdf",
+  //     body: "asdf↵",
+  //     comments: []
+  //   }
+  // }
 }
 
+// function that grabs from DB and sets INITIAL_STATE ->> getDataFromDB()
+
 function rootReducer(state = INITIAL_STATE, action) {
+  // make this async and update -- state = await getDataFromDB()
   switch (action.type) {
     case ADD_BLOG_POST:
       return { blogs: { ...state.blogs, ...action.payload } }
@@ -46,6 +55,16 @@ function rootReducer(state = INITIAL_STATE, action) {
       modBlog.comments = modComments;
       delete modBlog.id;
       return { blogs: { ...state.blogs, [blId]: modBlog } }
+
+    case SHOW_LOADING:
+      return { loading: "Loading..." }
+
+    case LOAD_BLOGS:
+      console.log("Blogs from reducer", action)
+      return { blogs: action.blogs }
+
+    case SHOW_ERR:
+      return { error: "Couldn't find your blog posts :(" }
 
     default:
       return state
