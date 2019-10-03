@@ -20,9 +20,9 @@ class NewBlogForm extends Component {
     });
   }
 
-  handleSubmit(evt){
+  async handleSubmit(evt){
     evt.preventDefault();
-    this.props.addBlog(this.state);
+    await this.props.addBlogToDB(this.state);
     this.setState({
       title: '',
       description: '',

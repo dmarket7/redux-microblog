@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { editBlog, deleteBlog, addComment, deleteComment, getBlogFromDB, deleteBlogFromDB } from '../actions';
+import { editBlogInDB, deleteBlog, addComment, deleteComment, getBlogFromDB, deleteBlogFromDB } from '../actions';
 import BlogDetails from '../Components/BlogDetails';
 
 function mapStateToProps(state, ownProps) {
@@ -8,7 +8,7 @@ function mapStateToProps(state, ownProps) {
 
 const connectedComponent = connect(
   mapStateToProps,
-  { editBlog, deleteBlog, addComment, deleteComment, getBlogFromDB, deleteBlogFromDB }
+  { deleteBlog, addComment, deleteComment, getBlogFromDB, deleteBlogFromDB, editBlogInDB }
 );
 
 export default connectedComponent(BlogDetails);

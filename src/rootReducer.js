@@ -23,16 +23,8 @@ const INITIAL_STATE = {
 function rootReducer(state = INITIAL_STATE, action) {
   // make this async and update -- state = await getDataFromDB()
   switch (action.type) {
-    case ADD_BLOG_POST:
-      return { blogs: { ...state.blogs, ...action.payload } }
-
     case EDIT_BLOG_POST:
-      return { blogs: { ...state.blogs, ...action.payload } }
-
-    case DELETE_BLOG_POST:
-      let allBlogs = { ...state.blogs };
-      delete allBlogs[action.payload];
-      return { blogs: allBlogs }
+      return { currentBlog: action.blog }
 
     case ADD_COMMENT:
       let { blogId, comment } = action.payload;

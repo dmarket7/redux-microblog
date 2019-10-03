@@ -1,23 +1,12 @@
 import { ADD_BLOG_POST, EDIT_BLOG_POST, DELETE_BLOG_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_BLOGS, SHOW_ERR, SHOW_LOADING, LOAD_BLOG } from './actionTypes';
-import uuid from 'uuid/v4';
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:5000/'
 
-export function addBlog(blog) {
-  let newBlog = {
-    [uuid()]: { ...blog }
-  }
-  return {
-    type: ADD_BLOG_POST,
-    payload: newBlog
-  }
-}
-
-export function editBlog(blog) {
+function editBlog(blog) {
   return {
     type: EDIT_BLOG_POST,
-    payload: blog
+    blog
   }
 }
 
@@ -92,6 +81,31 @@ export function deleteBlogFromDB(id) {
 
     try {
       await axios.delete(`${BASE_URL}api/posts/${id}`);
+    } catch(err) {
+      dispatch(showErr(err.response.data));
+    }
+  }
+}
+
+export function addBlogToDB(blog) {
+  return async function (dispatch) {
+    dispatch(startLoad());
+
+    try {
+      await axios.post(`${BASE_URL}api/posts/`, blog);
+    } catch(err) {
+      dispatch(showErr(err.response.data));
+    }
+  }
+}
+
+export function editBlogInDB(blog) {
+  return async function (dispatch) {
+    dispatch(startLoad());
+
+    try {
+      let res = await axios.put(`${BASE_URL}api/posts/${blog.id}`, blog);
+      dispatch(editBlog(res.data));
     } catch(err) {
       dispatch(showErr(err.response.data));
     }

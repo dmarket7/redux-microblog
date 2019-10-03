@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addBlog } from '../actions';
+import { addBlogToDB } from '../actions';
 import NewBlogForm from '../Components/NewBlogForm';
 
 function mapStateToProps(state) {
@@ -8,7 +8,7 @@ function mapStateToProps(state) {
 
 const connectedComponent = connect(
   mapStateToProps,
-  { addBlog }
+  { addBlogToDB }
 );
 
 export default connectedComponent(NewBlogForm);

@@ -30,6 +30,7 @@ class BlogDetails extends Component {
   }
 
   render() {
+    console.log("CURRENT BLOG", this.props.currentBlog);
     if (!this.props.currentBlog) {
       return <p>{this.props.loading}</p>
     } else {
@@ -52,7 +53,7 @@ class BlogDetails extends Component {
                 id={id}
               />
             </div> :
-            <EditBlogForm blog={this.props.blog} editBlog={this.props.editBlog} toggleEdit={this.toggleEdit} />
+            <EditBlogForm currentBlog={this.props.currentBlog} editBlogInDB={this.props.editBlogInDB} toggleEdit={this.toggleEdit} />
           }
 
         </div>

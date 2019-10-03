@@ -16,10 +16,12 @@ class EditBlogForm extends React.Component {
 
   componentDidMount() {
     this.setState({
-      title: this.props.blog.title,
-      description: this.props.blog.description,
-      body: this.props.blog.body,
-      id: this.props.blog.id
+      title: this.props.currentBlog.title,
+      description: this.props.currentBlog.description,
+      body: this.props.currentBlog.body,
+      id: this.props.currentBlog.id,
+      votes: this.props.currentBlog.votes,
+      comments: this.props.currentBlog.comments
     });
   }
 
@@ -29,12 +31,9 @@ class EditBlogForm extends React.Component {
     })
   }
 
-  handleSubmit(evt){
+  async handleSubmit(evt){
     evt.preventDefault();
-    let blogId = this.state.id;
-    let blogObj = this.state;
-    delete blogObj.id;
-    this.props.editBlog({ [blogId]: blogObj });
+    await this.props.editBlogInDB(this.state);
     this.props.toggleEdit();
   }
 
