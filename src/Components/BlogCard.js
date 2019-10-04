@@ -12,12 +12,12 @@ class BlogCard extends Component {
           <CardSubtitle>{description}</CardSubtitle>
           <Link to={`/${this.props.blog.id}`}><Button className="my-2">View Full Post</Button></Link>
           <CardFooter className="text-muted">
-            <Button color="success" onClick={() => this.props.upVote(this.props.blog.id)} className="mx-2">
-              <i class="far fa-thumbs-up"></i>
+            <Button color="light" onClick={() => this.props.upVote(this.props.blog.id)} className="mx-2">
+              <i class="fas fa-thumbs-up text-success"></i>
             </Button>
             {this.props.blog.votes}
-            <Button color="danger" onClick={() => this.props.downVote(this.props.blog.id)} className="mx-2">
-              <i class="far fa-thumbs-down"></i>
+            <Button color="light" onClick={() => this.props.downVote(this.props.blog.id)} className="mx-2">
+              <i className="fas fa-thumbs-down text-danger"></i>
             </Button>
           </CardFooter>
         </Card>

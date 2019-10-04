@@ -47,12 +47,12 @@ class BlogDetails extends Component {
               <h2>{title}</h2>
               <h5><i>{description}</i></h5>
               <div className="votes my-2">
-                <Button color="success" className="mx-2" onClick={() => this.props.upVote(id)}>
-                  <i class="far fa-thumbs-up"></i>
+                <Button color="white" className="mx-2" onClick={() => this.props.upVote(id)}>
+                  <i class="fas fa-thumbs-up text-success"></i>
                 </Button>
                 {votes}
-                <Button color="danger" className="mx-2" onClick={() => this.props.downVote(id)}>
-                  <i class="far fa-thumbs-down"></i>
+                <Button color="white" className="mx-2" onClick={() => this.props.downVote(id)}>
+                  <i class="fas fa-thumbs-down text-danger"></i>
                 </Button>
               </div>
               <p className="blog-body">{body}</p>
