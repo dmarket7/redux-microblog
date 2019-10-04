@@ -7,3 +7,5 @@ export const LOAD_BLOGS = "LOAD_BLOGS";
 export const SHOW_ERR = "SHOW_ERR";
 export const SHOW_LOADING = "SHOW_LOADING";
 export const LOAD_BLOG = "LOAD_BLOG";
+export const UP_VOTE = "UP_VOTE";
+export const DOWN_VOTE = "DOWN_VOTE";

@@ -1,4 +1,5 @@
-import { ADD_BLOG_POST, EDIT_BLOG_POST, DELETE_BLOG_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_BLOGS, SHOW_ERR, SHOW_LOADING, LOAD_BLOG } from './actionTypes';
+import { EDIT_BLOG_POST, DELETE_BLOG_POST, ADD_COMMENT, DELETE_COMMENT, 
+        LOAD_BLOGS, SHOW_ERR, SHOW_LOADING, LOAD_BLOG, UP_VOTE, DOWN_VOTE } from './actionTypes';
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:5000/'
@@ -28,6 +29,22 @@ export function deleteComment(blogId, commentId) {
   return {
     type: DELETE_COMMENT,
     payload: { blogId, commentId }
+  }
+}
+
+function incrementVote(blogId, votes){
+  return {
+    type: UP_VOTE,
+    blogId,
+    votes
+  }
+}
+
+function decrementVote(blogId, votes){
+  return {
+    type: DOWN_VOTE,
+    blogId,
+    votes
   }
 }
 
@@ -118,10 +135,8 @@ export function addCommentToDB(blogId, text){
 
     try {
       let res = await axios.post(`${BASE_URL}api/posts/${blogId}/comments`, {text});
-      console.log("RES", res)
       dispatch(addComment(res.data))
     } catch(err) {
-      console.log("ERR", err)
       dispatch(showErr(err));
     }
   }
@@ -134,6 +149,32 @@ export function deleteCommentFromDB(blogId, commId){
     try {
       await axios.delete(`${BASE_URL}api/posts/${blogId}/comments/${commId}`);
       dispatch(deleteComment(blogId, commId))
+    } catch(err) {
+      dispatch(showErr(err.response.data));
+    }
+  }
+}
+
+export function upVote(blogId){
+  return async function(dispatch){
+    dispatch(startLoad());
+
+    try {
+      let res = await axios.post(`${BASE_URL}api/posts/${blogId}/vote/up`);
+      dispatch(incrementVote(blogId, res.data.votes))
+    } catch(err) {
+      dispatch(showErr(err.response.data));
+    }
+  }
+}
+
+export function downVote(blogId){
+  return async function(dispatch){
+    dispatch(startLoad());
+
+    try {
+      let res = await axios.post(`${BASE_URL}api/posts/${blogId}/vote/down`);
+      dispatch(decrementVote(blogId, res.data.votes))
     } catch(err) {
       dispatch(showErr(err.response.data));
     }

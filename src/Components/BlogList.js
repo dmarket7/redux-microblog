@@ -20,7 +20,7 @@ class BlogList extends Component {
             this.props.blogs.map(blog => {
               // destructure with variable names
               return <BlogCard key={blog.id}
-                blog={blog}
+                blog={blog} upVote={this.props.upVote} downVote={this.props.downVote}
                  />
             })
           }
