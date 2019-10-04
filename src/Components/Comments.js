@@ -7,7 +7,7 @@ class Comments extends Component {
     return (
       <div>
         <CommentsList comments={this.props.comments}
-                      deleteComment={this.props.deleteComment}
+                      deleteCommentFromDB={this.props.deleteCommentFromDB}
                       id={this.props.id}/>
         <NewCommentForm addCommentToDB={this.props.addCommentToDB} id={this.props.id}/>
       </div>

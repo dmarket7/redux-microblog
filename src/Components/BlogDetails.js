@@ -34,7 +34,6 @@ class BlogDetails extends Component {
   }
 
   render() {
-    console.log("CURRENT BLOG", this.props.currentBlog);
     if (!this.props.currentBlog || this.props.loading) {
       return <p>{this.props.loading}</p>
     } else {
@@ -53,7 +52,7 @@ class BlogDetails extends Component {
               <p>{body}</p>
               <Comments comments={comments || []}
                 addCommentToDB={this.props.addCommentToDB}
-                deleteComment={this.props.deleteComment}
+                deleteCommentFromDB={this.props.deleteCommentFromDB}
                 id={id}
               />
             </div> :

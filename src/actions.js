@@ -126,3 +126,16 @@ export function addCommentToDB(blogId, text){
     }
   }
 }
+
+export function deleteCommentFromDB(blogId, commId){
+  return async function(dispatch){
+    dispatch(startLoad());
+
+    try {
+      await axios.delete(`${BASE_URL}api/posts/${blogId}/comments/${commId}`);
+      dispatch(deleteComment(blogId, commId))
+    } catch(err) {
+      dispatch(showErr(err.response.data));
+    }
+  }
+}

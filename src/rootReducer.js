@@ -34,12 +34,11 @@ function rootReducer(state = INITIAL_STATE, action) {
 
     case DELETE_COMMENT:
       let commId = action.payload.commentId;
-      let blId = action.payload.blogId;
-      let modBlog = { ...state.blogs[blId] };
-      let modComments = modBlog.comments.filter(c => c.commentId !== commId);
-      modBlog.comments = modComments;
-      delete modBlog.id;
-      return { ...state, blogs: { ...state.blogs, [blId]: modBlog }, loading: null }
+      // let blId = action.payload.blogId;
+      let currBlog = { ...state.currentBlog };
+      currBlog.comments = currBlog.comments.filter(c => c.id !== commId)
+      console.log("Current blog", currBlog)
+      return { ...state, loading: null, currentBlog: currBlog }
 
     case SHOW_LOADING:
       return { ...state, loading: "Loading..." }
