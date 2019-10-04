@@ -41,13 +41,13 @@ class BlogDetails extends Component {
       const { title, body, description, comments, id, votes } = this.props.currentBlog;
       return (
         <div className="container">
-          <BlogHeader />
+
           {!(this.state.editing) ?
             <div>
               <h2>{title}</h2>
               <h5><i>{description}</i></h5>
               <div className="votes my-2">
-                <Button color="white" className="mx-2" onClick={() => this.props.upVote(id)}>
+                <Button color="" className="mx-2" onClick={() => this.props.upVote(id)}>
                   <i class="fas fa-thumbs-up text-success"></i>
                 </Button>
                 {votes}
