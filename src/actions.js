@@ -11,13 +11,6 @@ function editBlog(blog) {
   }
 }
 
-export function deleteBlog(id) {
-  return {
-    type: DELETE_BLOG_POST,
-    id
-  }
-}
-
 function addComment(comment) {
   return {
     type: ADD_COMMENT,
@@ -25,7 +18,7 @@ function addComment(comment) {
   }
 }
 
-export function deleteComment(blogId, commentId) {
+function deleteComment(blogId, commentId) {
   return {
     type: DELETE_COMMENT,
     payload: { blogId, commentId }

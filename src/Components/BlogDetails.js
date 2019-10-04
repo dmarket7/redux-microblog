@@ -3,6 +3,7 @@ import BlogHeader from './BlogHeader';
 import EditBlogForm from './EditBlogForm';
 import { Button } from 'reactstrap';
 import Comments from './Comments'
+import '.././BlogDetails.css';
 
 class BlogDetails extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class BlogDetails extends Component {
     if (!this.props.currentBlog || this.props.loading) {
       return <p>{this.props.loading}</p>
     } else {
-      const { title, body, description, comments, id } = this.props.currentBlog;
+      const { title, body, description, comments, id, votes } = this.props.currentBlog;
       return (
         <div className="container">
           <BlogHeader />
@@ -45,16 +46,29 @@ class BlogDetails extends Component {
             <div>
               <h2>{title}</h2>
               <h5><i>{description}</i></h5>
-              <div className="buttons">
-                <Button color="success" className="mx-3" onClick={this.toggleEdit}>Edit</Button>
-                <Button color="danger" className="mx-3" onClick={() => this.deleteAndRedirect(id)}>Delete</Button>
+              <div className="votes my-2">
+                <Button color="success" className="mx-2" onClick={() => this.props.upVote(id)}>
+                  <i class="far fa-thumbs-up"></i>
+                </Button>
+                {votes}
+                <Button color="danger" className="mx-2" onClick={() => this.props.downVote(id)}>
+                  <i class="far fa-thumbs-down"></i>
+                </Button>
               </div>
-              <p>{body}</p>
+              <p className="blog-body">{body}</p>
               <Comments comments={comments || []}
                 addCommentToDB={this.props.addCommentToDB}
                 deleteCommentFromDB={this.props.deleteCommentFromDB}
                 id={id}
               />
+              <div className="buttons mt-5">
+                <Button color="success" className="mx-3" onClick={this.toggleEdit}>
+                  <i class="far fa-edit"></i> Edit
+                </Button>
+                <Button color="danger" className="mx-3" onClick={() => this.deleteAndRedirect(id)}>
+                  <i class="far fa-trash-alt"></i> Delete
+                </Button>
+              </div>
             </div> :
             <EditBlogForm currentBlog={this.props.currentBlog} editBlogInDB={this.props.editBlogInDB} toggleEdit={this.toggleEdit} />
           }

@@ -10,10 +10,8 @@ class BlogList extends Component {
   render() {
     return (
       <div>
-        <h2>BlogList</h2>
-        Map and create BlogCards...
+        <h2>Blog Posts</h2>
         <Row>
-
           {!this.props.blogs ?
             <p>{this.props.loading}</p> :
 
@@ -21,7 +19,7 @@ class BlogList extends Component {
               // destructure with variable names
               return <BlogCard key={blog.id}
                 blog={blog} upVote={this.props.upVote} downVote={this.props.downVote}
-                 />
+              />
             })
           }
         </Row>

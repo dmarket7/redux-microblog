@@ -5,7 +5,7 @@ import NewCommentForm from './NewCommentForm';
 class Comments extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <CommentsList comments={this.props.comments}
                       deleteCommentFromDB={this.props.deleteCommentFromDB}
                       id={this.props.id}/>

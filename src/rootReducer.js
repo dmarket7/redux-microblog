@@ -28,6 +28,7 @@ function rootReducer(state = INITIAL_STATE, action) {
       return { ...state, loading: null, error: null, currentBlog: currBlog }
 
     case UP_VOTE:
+    case DOWN_VOTE: 
       let curBlog;
       if(state.currentBlog.id){
         curBlog = { ...state.currentBlog }
@@ -45,22 +46,22 @@ function rootReducer(state = INITIAL_STATE, action) {
       })
       return { ...state, loading: null, error: null, blogs, currentBlog: curBlog }
 
-    case DOWN_VOTE:
-      let cBlog;
-      if(state.currentBlog.id){
-        cBlog = { ...state.currentBlog }
-        cBlog.votes = action.votes;
-      } else {
-        cBlog = {};
-      }
-      let dBlogs = [...state.blogs];
-      dBlogs = dBlogs.map(b => {
-        if (b.id === action.blogId) {
-          b.votes = action.votes;
-        }
-        return b;
-      })
-      return { ...state, loading: null, error: null, blogs: dBlogs, currentBlog: cBlog }
+    // case DOWN_VOTE:
+    //   let cBlog;
+    //   if(state.currentBlog.id){
+    //     cBlog = { ...state.currentBlog }
+    //     cBlog.votes = action.votes;
+    //   } else {
+    //     cBlog = {};
+    //   }
+    //   let dBlogs = [...state.blogs];
+    //   dBlogs = dBlogs.map(b => {
+    //     if (b.id === action.blogId) {
+    //       b.votes = action.votes;
+    //     }
+    //     return b;
+    //   })
+    //   return { ...state, loading: null, error: null, blogs: dBlogs, currentBlog: cBlog }
 
     case SHOW_LOADING:
       return { ...state, loading: "Loading..." }

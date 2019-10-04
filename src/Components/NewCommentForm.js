@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
+import '../NewCommentForm.css';
 
 class NewCommentForm extends Component {
   constructor(props) {
@@ -35,7 +36,10 @@ class NewCommentForm extends Component {
         <Col sm={12} className="offset-sm-2">
           <FormGroup >
             <Label for="comment">Comment &nbsp;</Label>
-            <Input onChange={this.handleChange} type="text" name="comment" id="comment" value={this.state.comment} />
+            <Input className="comment-input" onChange={this.handleChange} 
+                   type="text" name="comment" id="comment" 
+                   value={this.state.comment} 
+            />
             <Button type="submit">Add Comment</Button>
           </FormGroup>
         </Col>
