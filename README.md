@@ -1,4 +1,4 @@
-#Redux Microblog
+# Redux Microblog
 
 This app was created at Rithm School.
 
