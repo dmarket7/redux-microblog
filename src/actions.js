@@ -2,7 +2,7 @@ import { EDIT_BLOG_POST, DELETE_BLOG_POST, ADD_COMMENT, DELETE_COMMENT,
         LOAD_BLOGS, SHOW_ERR, SHOW_LOADING, LOAD_BLOG, UP_VOTE, DOWN_VOTE } from './actionTypes';
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5000/'
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000/'
 
 function editBlog(blog) {
   return {
