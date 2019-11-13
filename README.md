@@ -1,8 +1,8 @@
 # Redux Microblog
 
-This app was created at Rithm School.
+This is CRUD based blog app.
 
-Some of the core technologies used to build this app:
+Some of the core technologies used:
 * React
 * React router
 * React Redux
